@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Desenvolvimento web">
+        <meta name="Keywords" content="programação, ti, php, ajax">
+        <meta name="author" content="chaves-ti">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+        <title>Seaching with ajax</title>
+    </head>
+
+    <style>
+        .topo{
+            margin: 15px;
+        }
+
+        .largura-tabela{
+            margin: 0 auto;
+            width: 800px;
+        }
+    </style>
+    
+<body>
+    
+    <div class="container topo">
+        <h2 align="center">Filters ajax and php</h2>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-text">Search</span>
+                    <input type="text" name="buscar" id="buscar" placeholder="Write the name" class="form-control">
+                </div>
+            </div>
+        </div>
+        <br>
+        
+
+        <div>
+        <div id="resultado"></div>
+        </div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+ 
+ <script>
+
+    //getting the data with ajax
+   function buscarNome(nome){
+
+    $.ajax({
+        url: "search.php",
+        method: "POST",
+        data:{nome:nome},
+        success: function(data){
+            $('#resultado').html(data);
+        }
+    });
+
+   }
+  
+   //assigning and checking the data and send to php file
+   $(document).ready(function(){
+    buscarNome();
+    
+    $('#buscar').keyup(function(){
+        var nome = $(this).val();
+        if (nome != '') {
+            buscarNome(nome);
+        }
+        else{
+            buscarNome();
+        }
+    });
+    
+   })
+  
+ </script>   
+</body>
+</html>
